@@ -67,22 +67,30 @@ target_link_libraries(
   ${tf2_ros_LIBRARIES}
   ${sensor_msgs_LIBRARIES})
 
+ament_export_interfaces(export_robot_state_publisher HAS_LIBRARY_TARGET)
+ament_export_dependencies(
+  ament_cmake
+  geometry_msgs
+  rclcpp
+  sensor_msgs
+  orocos_kdl
+  urdf
+  urdfdom_headers
+  kdl_parser
+  tf2_ros)
+
 install(
   TARGETS
-  ${PROJECT_NAME}_solver
-  joint_state_listener
+    ${PROJECT_NAME}_solver
+    joint_state_listener
+  EXPORT export_robot_state_publisher
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin
-)
+  INCLUDES DESTINATION include)
 
 install(DIRECTORY include/
   DESTINATION include)
-
-install(
-  TARGETS ${PROJECT_NAME}
-  DESTINATION lib/${PROJECT_NAME}
-)
 
 if(BUILD_TESTING)
   find_package(ament_cmake_cppcheck REQUIRED)
@@ -98,8 +106,4 @@ if(BUILD_TESTING)
   ament_uncrustify()
 endif()
 
-ament_export_include_directories(include)
-ament_export_libraries(
-  ${PROJECT_NAME}_solver
-  joint_state_listener)
 ament_package()
