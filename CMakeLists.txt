@@ -98,6 +98,17 @@ if(BUILD_TESTING)
   ament_uncrustify()
 endif()
 
+ament_export_dependencies(
+  geometry_msgs
+  kdl_parser
+  orocos_kdl
+  rclcpp
+  sensor_msgs
+  tf2_ros
+  urdf
+  urdfdom_headers
+)
+ament_export_include_directories(include)
 ament_export_libraries(
   ${PROJECT_NAME}_solver
   joint_state_listener)
