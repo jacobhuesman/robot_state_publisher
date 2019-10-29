@@ -98,6 +98,7 @@ if(BUILD_TESTING)
   ament_uncrustify()
 endif()
 
+ament_export_include_directories(include)
 ament_export_libraries(
   ${PROJECT_NAME}_solver
   joint_state_listener)
